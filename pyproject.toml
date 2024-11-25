@@ -1,0 +1,69 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "okopilote-boilers-okofen-touch4"
+dynamic = ["version"]
+description = 'Okofen Pelletronic Touch4 boiler interface for Okopilote suite'
+readme = "README.md"
+requires-python = ">=3.7"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "François", email = "francoismdj@gmx.fr" },
+]
+classifiers = [
+  "Topic :: Software Development :: Embedded Systems",
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "requests~=2.22.0",
+  "okopilote.devices.common~=0.0.2",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/okopilote"]
+
+[tool.hatch.version]
+path = "src/okopilote/boilers/okofen/touch4/__about__.py"
+
+[project.urls]
+Documentation = "https://github.com/francoismdj/okopilote/boilers/okofen-touch4#readme"
+Issues = "https://github.com/francoismdj/okopilote/boilers/okofen-touch4/issues"
+Source = "https://github.com/francoismdj/okopilote/boilers/okofen-touch4"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/okopilote/boilers/okofen/touch4 tests}"
+
+[tool.coverage.run]
+source_pkgs = ["okopilote", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/okopilote/boilers/okofen/touch4/__about__.py",
+]
+
+[tool.coverage.paths]
+okopilote_boilers_okofen_touch4 = ["src/okopilote/boilers/okofen/touch4", "*/okofen-touch4/src/okopilote/boilers/okofen/touch4"]
+tests = ["tests", "*/okofen-touch4/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
